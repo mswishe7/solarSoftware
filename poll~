@@ -1,0 +1,10 @@
+#!/bin/bash
+
+sudo nohup './led.py cw' &>/dev/null &
+ledPID=`pidof -x led.py`
+
+sudo nohup ./suresine/loop_suresine &>/dev/null &
+suresinePID=`pidof -x loop_suresine`
+
+sudo nohup './led.py cw' &>/dev/null &
+ledPID=`pidof -x led.py`

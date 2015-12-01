@@ -1,0 +1,11 @@
+#!/bin/bash
+#This script will loop and call the suresine script
+for ((; ; ))
+do
+    sudo ./suresine 0        #Execute the program
+    sleep 2                  #Delay for 2 seconds
+    if (disaster-condition)  #Watch for the 'Ctrl-C' to break the loop
+    then
+	break
+    fi
+done

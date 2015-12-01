@@ -1,0 +1,23 @@
+import time, signal, sys
+from Adafruit_ADS1x15 import ADS1x15
+import Adafruit_ADS1x15
+import MySQLdb
+
+ADS1115 = 0x01
+gain = 4096
+sps = 250
+adc = ADS1x15(ic=ADS1115)
+
+#Open DB connection
+db = MySQLdb.connect("localhost","root","solar","solar_tree")
+
+cursor = db.cursor()
+while 1:
+    mV = adc.readADCSingleEnded(0,gain,sps)
+    amps = (mV - 545) / 66
+    #500 mV = 0 A
+    #66mV/A after the initial 500 mV
+    print "%.6f A" % (amps)
+    cursor.execute("INSERT into InputCurrent (InputCurrent) VALUES(%f)" %(amps))
+    db.commit()
+    time.sleep(2)

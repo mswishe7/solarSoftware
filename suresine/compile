@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cc -g `pkg-config --cflags --libs libmodbus` suresine.c -o suresine $(mysql_config --libs) -I/usr/include/mysql
